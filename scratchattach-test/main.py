@@ -51,7 +51,7 @@ def log_in(username, password):
     else:
         with open(f"{username}.json", "r") as f:
             data = json.load(f)
-            if data["password"] == password:
+            if data["password"] == password and not data["rank"] == "Unverified":
                  return "logged in"
             else:
                 return "wrong password/unverified account"
@@ -81,4 +81,4 @@ def clearchat():
 def on_ready():
     print("Request handler is running")
 
-client.run()
+client.start()
