@@ -80,6 +80,26 @@ def setdata(argument1, argument2):
             json.dump(data, f, indent=4)
             return "data set"
 
+@client.request
+def sendnotif(username, notif):
+  with open(f"{username}.json", "r") as f:
+    data = json.load(f)
+
+  data["notifications"] = notif
+
+  with open(f'{username}.json', "w") as f:
+    json.dump(data, f, indent=4)
+    return "sent notif"
+
+@client.request
+def isuseradmin(username):
+  with open(f"{username}.json", "r") as f:
+    data = json.load(f)
+
+  if data["isAdmin"] == "true":
+    return "is admin"
+  else:
+    return "is not admin"
 
 @client.event
 def on_ready():
