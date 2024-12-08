@@ -101,6 +101,17 @@ def isuseradmin(username):
   else:
     return "is not admin"
 
+@client.request
+def verifyuser(username):
+  with open(f"{username}.json", "r") as f:
+    data = json.load(f)
+
+  data["accounttype"] = "verified"
+
+  with open(f'{username}.json', "w") as f:
+    json.dump(data, f, indent=4)
+    return "verified"
+
 @client.event
 def on_ready():
   print("Request handler is running")
